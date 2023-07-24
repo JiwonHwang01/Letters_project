@@ -1,3 +1,6 @@
 from django.contrib import admin
+from letters.models import LetterCase, User, Letter
 
-# Register your models here.
+admin.site.register(LetterCase)
+admin.site.register(User)
+admin.site.register(Letter)
