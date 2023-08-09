@@ -1,0 +1,10 @@
+<ul>
+{% if user.is_authenticated %}
+<a href="{% url 'logout'%}">Log Out</a>
+<button type="button" class="LogOutBtn" onclick = "location.href='/accounts/logout/'">log out</a>
+{% else %}
+<a href="{% url 'login'%}">Log In</a>    
+<button type="button" class="LogInBtn" onclick = "location.href='/accounts/login/'">log in</a>
+<button type="button" class="SignUpBtn" onclick = "location.href='/letters/signup/'">sign up</a>
+{% endif %}
+</ul>
