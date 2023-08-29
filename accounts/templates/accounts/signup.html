@@ -24,6 +24,12 @@
             <input type="text" class="form-control" name="email" id="email"
                    value="{{ form.email.value|default_if_none:'' }}">
         </div>
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <p>
+            {{ field.errors }}
+            </p>
+        {% endfor %}
         <button type="submit" class="btn btn-primary">생성하기</button>
     </form>
 </div>

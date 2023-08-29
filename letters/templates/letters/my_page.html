@@ -44,9 +44,11 @@
             </thead>
             <tbody>
             {% if letter_list %}
+            {{letter_list}}
                 {% for data in letter_list %}
+                    {{data}}<br>
                     "1" {{data.visitor_id}} {{username}}
-                    {% if data.visitor_id == username %}
+                    {% if data.user == username %}
                     {{data.visitor_id}} {{username}}
 
                     <tr class="{% if forloop.counter|divisibleby:2 %}even_bgcolor{% endif %}">
