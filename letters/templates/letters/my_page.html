@@ -45,16 +45,22 @@
             <tbody>
             {% if letter_list %}
                 {% for data in letter_list %}
-                <tr class="{% if forloop.counter|divisibleby:2 %}even_bgcolor{% endif %}">
-                    <td style="text-align:center;">{{ forloop.counter }}</td>
-                    <td>
-                        <a>
-                            {{ data.title }}
-                        </a>
-                    </td>
-                    <td>{{ data.visitor_id }}</td>
-                    <td>{{ data.pub_date|date:'Y-m-d' }}</td>
-                </tr>
+                    "1" {{data.visitor_id}} {{username}}
+                    {% if data.visitor_id == username %}
+                    {{data.visitor_id}} {{username}}
+
+                    <tr class="{% if forloop.counter|divisibleby:2 %}even_bgcolor{% endif %}">
+                        <td style="text-align:center;">{{ forloop.counter }}</td>
+                        
+                        <td>
+                            <a>
+                                {{ data.title }}
+                            </a>
+                        </td>
+                        <td>{{ data.visitor_id }}</td>
+                        <td>{{ data.pub_date|date:'Y-m-d' }}</td>
+                    </tr>
+                    {% endif %} 
                 {% endfor %}
             {% else %}
                 <tr>

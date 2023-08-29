@@ -3,7 +3,7 @@
 <form action="/letters/login/" method="post">
     {% csrf_token %}
     <input type= "text" placeholder= "Id" name="userId" required>
-    <input type= "password" placeholder= "Password" name="userPw" required>
+    <input type= "password" placeholder= "Password" name="userPw" autocomplete="current-password" required>
     <button type="submit">Login</button>
 </form>
 <ul>
