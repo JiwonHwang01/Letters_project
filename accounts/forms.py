@@ -13,8 +13,8 @@ def generate_random_slug_code(length=12):
 
 class UserForm(UserCreationForm):
     email = forms.EmailField(label="이메일")
-    # lettercase_url = forms.CharField(max_length=200)
-
+    lettercase_url = forms.CharField(initial=generate_random_slug_code(),required=False)
+    
     class Meta:
         model = User
-        fields = ("username", "password1", "password2", "email")
+        fields = ["username", "password1", "password2", "email","lettercase_url"]
