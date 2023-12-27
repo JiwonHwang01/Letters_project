@@ -3,10 +3,8 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     password = models.CharField(max_length=100)
-    lettercase_url = models.CharField(max_length=200, default = None, null=True)
+    lettercase_url = models.CharField(max_length=200, default = None, null=True, blank = True)
     
-
-
 class LetterCase(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
     letter_url = models.CharField(max_length=200)

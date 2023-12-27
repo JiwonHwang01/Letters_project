@@ -55,7 +55,7 @@
                         <td style="text-align:center;">{{ forloop.counter }}</td>
                         
                         <td>
-                            <a>
+                            <a href="{%url 'letter_detail' data.id %}">
                                 {{ data.title }}
                             </a>
                         </td>
@@ -71,6 +71,7 @@
             {% endif %}
             </tbody>
         </table>
+        <button type="button" class="HomeBtn" onclick = "location.href='/letters/'">Home</button><br>
     </div>
 </body>
 </html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>편지 작성</title>
+</head>
+<style type="text/css">
+        .h1 {
+            max-width:500px;
+            margin: auto;
+            padding:10px;
+        }
+
+        .content {
+            max-width:500px;
+            margin: auto;
+            padding:10px;
+        }
+
+		.reply_content {
+			text-align:right	
+		}
+
+		.reply_content .reply{
+			border-radius: 0.5em;
+			display: block;
+			margin: 4px;
+			padding: 3px 10px;
+		}
+
+		.letter_for_write {
+			width: 100%;
+			background-color:#f1f1f1;
+		}
+
+		#title {
+			height: 32px;
+			width: 100%;
+			border-radius: 0.25em;
+			border: none;
+			font-family: inherit;
+			font-size: inherit;
+			background: #FFFFFF;
+		}
+
+        #visitor_id {
+			height: 32px;
+			width: 100%;
+			border-radius: 0.25em;
+			border: none;
+			font-family: inherit;
+			font-size: inherit;
+			background: #FFFFFF;
+		}
+
+        textarea {
+			width: 100%;
+            font-family: inherit;
+            font-size: 100%;
+			resize: none;
+			border-radius: 0.25em;
+			padding-block: 10px;
+			border: 0px;
+			background: #FFFFFF;
+        }
+
+		.td_title {
+			background-color: #d8d8d8
+		}
+    </style>
+<body>
+    
+    {% if user.is_authenticated %}
+    <h1>{{ user.username }}님께 편지 작성</h1>
+
+    <form method="post" action="{% url 'post_letter' %}">
+        <div class="content">
+
+            <table class="letter_for_write">
+                <tbody>
+                    <tr>
+                        <td class="td_title" style="text-align:center; width:20%;">제목</td>
+                        <td style="padding:5px;">
+                            <input type="text" name="title" id="title"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_title" style="text-align:center; width:20%;">작성자 ID</td>
+                        <td style="padding:5px;">
+                            <input type="text" name="visitor_id" id="visitor_id"/>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="td_title" style="text-align:center;">내용</td>
+                        <td style="padding:5px;">
+                            <textarea name="detail" id="detail" rows="10"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align:left; float:left;">
+                <a href="{% url 'index' %}" > Home</a>
+            </div>
+            <div style="text-align:right; float:right;">
+                <button type = submit>작성</button>
+            </div>
+    </form>
+    
+    {% else %}
+    Wrong Letter URL Code.
+    {% endif %}
+    <!-- 여기에서 필요한 추가적인 내용을 추가할 수 있습니다. -->
+
+</body>
+</html>

@@ -2,13 +2,14 @@
 {% if user.is_authenticated %}
 {{user.username}}<br>
 {{user.email}}<br>
-<a href="{% url 'logout'%}">Log Out</a><br>
-<button type="button" class="MyLetterBtn" onclick = "location.href='/letters/mypage/'">My Letters</a>
-<button type="button" class="LogOutBtn" onclick = "location.href='/accounts/logout/'">log out</a>
+{{user.lettercase_url}}<br>
+<button type="button" class="MyLetterBtn" onclick = "location.href='/letters/mypage/'">My Letters</button>
+<button type="button" class="LogOutBtn" onclick = "location.href='/accounts/logout/'">log out</button><br>
+<button type="button" class="Admin" onclick = "location.href='/admin/'">Admin</button>
 
 {% else %}
 <a href="{% url 'login'%}">Log In</a>    <br>
-<button type="button" class="LogInBtn" onclick = "location.href='/accounts/login/'">log in</a>
-<button type="button" class="SignUpBtn" onclick = "location.href='/accounts/signup/'">sign up</a>
+<button type="button" class="LogInBtn" onclick = "location.href='/accounts/login/'">log in</button>
+<button type="button" class="SignUpBtn" onclick = "location.href='/accounts/signup/'">sign up</button>
 {% endif %}
 </ul>
