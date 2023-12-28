@@ -27,8 +27,8 @@ def signup(request):
 
             return redirect('/letters/')
         else:
-            print(form.errors)
-            print("accounts/views/")
+            request.session['fail_reason'] = form.errors
+            print("/letters/")
     else:
         form = UserForm()
     return render(request, 'accounts/signup.html', {'form': form})
