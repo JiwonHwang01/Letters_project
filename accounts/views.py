@@ -1,15 +1,18 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from accounts.forms import UserForm
+from letters.models import User
 import uuid
 import base64
 import codecs
 
 def generate_random_slug_code(length=12):
-
-    return base64.urlsafe_b64encode(
-        codecs.encode(uuid.uuid4().bytes, "base64").rstrip()
-    ).decode()[:length]
+    code = None
+    while not code or User.objects.filter(lettercase_url=code).exists():
+        code = base64.urlsafe_b64encode(
+            codecs.encode(uuid.uuid4().bytes, "base64").rstrip()
+            ).decode()[:length]
+    return code
 
 def signup(request):
     if request.method == "POST":
@@ -19,7 +22,7 @@ def signup(request):
             user = form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user.lettercase_url = form.cleaned_data['lettercase_url'] or generate_random_slug_code()
+            user.lettercase_url = generate_random_slug_code()
             user.save()
             # form.save(update_fields=['lettercase_url'])
             user = authenticate(username = username, password = raw_password)
