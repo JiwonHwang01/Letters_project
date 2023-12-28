@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from letters.models import User, Letter
 from django.contrib.auth import authenticate, login, get_user
 from letters.forms import LetterForm
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     return render(request, 'letters/index.html')
@@ -21,27 +22,32 @@ def write_letter(request, token):
     try:
         user = User.objects.get(lettercase_url=token)
     except User.DoesNotExist:
+        print("WriteLetter Exception : DoesNotExist")
         user = None
-    print(user)
-    print(get_user(request))
+    
     return render(request, 'letters/write_letter.html', {'user':user})
     
 def post_letter(request):
-    
-    # 사용자가 POST 요청을 통해 폼을 제출한 경우
     if request.method == 'POST':
-        form = LetterForm(request.POST)
+        try:
+            user = User.objects.get(username = request.POST.get("user"))
+            form = LetterForm(request.POST)
+            #form.fields['user'].queryset = User.objects.filter(username=request.POST.get("user"))
+        except User.DoesNotExist:
+            print("PostLetter Exception : DoesNotExist")
+            return redirect('/letters/', status = 404)
+        
+        print(form)
         if form.is_valid():
-            letter = form.save(commit=False)
-            # 여기에서 sender를 현재 로그인한 사용자로 설정하거나, token을 통해 식별된 사용자로 설정합니다.
-            letter.sender = request.user
-            letter.save()
-            return redirect('letters/')  # 익명 편지 작성 성공 페이지로 이동
+                letter = form.save(commit=False)
+                print("valid")
+                letter.user = user
+                letter.save()
+                return redirect('/letters/', status = 200)  # 익명 편지 작성 성공
+    
     else:
+        print("PostLetter Invalidation : Post Request Invalid")
         form = LetterForm()
 
-    return render(request, 'write_anonymous_letter.html', {'form': form})
+    return redirect('/letters/', status = 400)
 
-def copyToClipBoard():
-    print("clipboard")
-    return

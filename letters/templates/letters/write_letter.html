@@ -33,7 +33,17 @@
 			background-color:#f1f1f1;
 		}
 
-		#title {
+		#user {
+			height: 32px;
+			width: 100%;
+			border-radius: 0.25em;
+			border: none;
+			font-family: inherit;
+			font-size: inherit;
+			background: #FFFFFF;
+		}
+
+        #title {
 			height: 32px;
 			width: 100%;
 			border-radius: 0.25em;
@@ -74,10 +84,17 @@
     <h1>{{ user.username }}님께 편지 작성</h1>
 
     <form method="post" action="{% url 'post_letter' %}">
+        {% csrf_token %}
         <div class="content">
 
             <table class="letter_for_write">
                 <tbody>
+                    <tr>
+                        <td class="td_title" style="text-align:center; width:20%;">받는사람</td>
+                        <td style="padding:5px;">
+                            <input type="text" name="user" id="user" value="{{user.username}}" readonly/>
+                        </td>
+                    </tr>
                     <tr>
                         <td class="td_title" style="text-align:center; width:20%;">제목</td>
                         <td style="padding:5px;">
@@ -94,7 +111,7 @@
                     <tr>
                         <td class="td_title" style="text-align:center;">내용</td>
                         <td style="padding:5px;">
-                            <textarea name="detail" id="detail" rows="10"></textarea>
+                            <textarea name="letter_text" id="letter_text" rows="10"></textarea>
                         </td>
                     </tr>
                 </tbody>
@@ -108,9 +125,8 @@
     </form>
     
     {% else %}
-    Wrong Letter URL Code.
+        Wrong Letter URL Code.
     {% endif %}
-    <!-- 여기에서 필요한 추가적인 내용을 추가할 수 있습니다. -->
 
 </body>
 </html>

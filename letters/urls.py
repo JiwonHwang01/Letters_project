@@ -7,6 +7,7 @@ urlpatterns = [
     # path('detail/', views.letterdetail, name='letter_detail'),
     path('mypage/', views.mypage, name='my_page'),
     path('<int:data_id>/', views.letter, name='letter_detail'),
-    path('<str:token>/', views.write_letter, name='write_letter'),
     path('post/', views.post_letter, name='post_letter'),
+    path('<str:token>/', views.write_letter, name='write_letter'),
+    
 ]
