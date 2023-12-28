@@ -2,7 +2,22 @@
 {% if user.is_authenticated %}
 {{user.username}}<br>
 {{user.email}}<br>
-{{user.lettercase_url}}<br>
+<div>
+편지쓰기 URL 
+<input type="text" name="url_text" id="url_text" value="127.0.0.1:8000/letters/{{user.lettercase_url}}" readonly/>
+<button type="button" class="btn btn-secondary"
+	onclick="copyToClipBoard()">url 복사</button>
+</div>
+<script>
+    function copyToClipBoard() {
+        const content = document.querySelector("#url_text");
+        content.select();
+        document.execCommand("copy");
+        alert("복사되었습니다!");
+      }
+</script>
+<br>
+
 <button type="button" class="MyLetterBtn" onclick = "location.href='/letters/mypage/'">My Letters</button>
 <button type="button" class="LogOutBtn" onclick = "location.href='/accounts/logout/'">log out</button><br>
 <button type="button" class="Admin" onclick = "location.href='/admin/'">Admin</button>

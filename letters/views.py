@@ -41,3 +41,7 @@ def post_letter(request):
         form = LetterForm()
 
     return render(request, 'write_anonymous_letter.html', {'form': form})
+
+def copyToClipBoard():
+    print("clipboard")
+    return
