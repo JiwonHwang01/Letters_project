@@ -20,12 +20,8 @@ def signup(request):
         
         if form.is_valid():
             user = form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
             user.lettercase_url = generate_random_slug_code()
             user.save()
-            # form.save(update_fields=['lettercase_url'])
-            user = authenticate(username = username, password = raw_password)
             login(request, user)
 
             return redirect('/letters/')
