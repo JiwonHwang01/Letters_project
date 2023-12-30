@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <!-- CSS나 meta 태그 추가 -->
+    <style type="text/css">
+        .content {
+            max-width:500px;
+            margin: auto;
+            padding:10px;
+        }
+
+        .header {
+            text-align: center;
+        }
+        
+		.reply_content {
+			text-align:right	
+		}
+
+		.reply_content .reply{
+			border-radius: 0.5em;
+			display: block;
+			margin: 4px;
+			padding: 3px 10px;
+		}
+
+		.letter_for_read {
+			width: 100%;
+			background-color:#f1f1f1;
+		}
+
+		#title {
+			height: 32px;
+			width: 100%;
+			border-radius: 0.5em;
+			border: none;
+			font-family: inherit;
+			font-size: inherit;
+			background: none;
+		}
+
+        textarea {
+			width: 100%;
+            font-family: inherit;
+            font-size: 100%;
+			resize: none;
+			border-radius: 0.5em;
+			padding-block: 10px;
+			border: 0px;
+			background: none;
+        }
+
+		.td_title {
+			background-color: #d8d8d8
+		}
+    </style>
+</head>
+<body>
+    <ul>
+        {% block user_info %}
+            <!-- 사용자 정보 표시 -->
+        {% endblock %}
+    </ul>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- JavaScript 코드 -->
+</body>
+</html>

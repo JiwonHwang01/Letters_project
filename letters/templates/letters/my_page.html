@@ -1,55 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<style type="text/css">
-        thead {
-            background-color:#cecece;
-        }
+{% extends 'base.html' %}
 
-        .content {
-            max-width:500px;
-            margin: auto;
-            padding:10px;
-        }
+{% block title %}My Letter{% endblock %}
 
-        .header {
-            text-align: center;
-        }
-
-        .board {
-            width: 100%
-        }
-
-        .even_bgcolor {
-            background-color:#e8efff;
-        }
-    </style>
-<body>
+{% block content %}
     <div class="content">
-        <div class="header">
-            <h2>{{ title }}</h2>
-        </div>
-       
-        <table class="board">
-            <thead>
-                <tr class="header">
-                    <th style="width:10%;">순번</th>
-                    <th style="width:40%">제목</th>
-                    <th style="width:20%">작성자</th>
-                    <th style="width:30%">작성일자</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% if letter_list %}
-            {{letter_list}}
+        <style type="text/css">
+            thead {
+                background-color:#cecece;
+            }
+        
+            .board {
+                width: 100%
+            }
+    
+            .even_bgcolor {
+                background-color:#e8efff;
+            }
+        </style>
+        {% if letter_list %}
+            <div class="header">
+                <h2>
+                    <p style="color: black; display: inline;">My Letters Page </p>
+                    <p style="color: red; display: inline;">{{letter_list|length}}</p>
+                </h2>
+            </div>
+            <table class="board">
+                <thead>
+                    <tr class="header">
+                        <th style="width:10%;">순번</th>
+                        <th style="width:40%">제목</th>
+                        <th style="width:20%">작성자</th>
+                        <th style="width:30%">작성일자</th>
+                    </tr>
+                </thead>
+                <tbody>
+                
                 {% for data in letter_list %}
-                    {{data}}<br>
-                    "1" {{data.visitor_id}} {{username}}
                     {% if data.user == username %}
-                    {{data.visitor_id}} {{username}}
 
                     <tr class="{% if forloop.counter|divisibleby:2 %}even_bgcolor{% endif %}">
                         <td style="text-align:center;">{{ forloop.counter }}</td>
@@ -65,13 +52,21 @@
                     {% endif %} 
                 {% endfor %}
             {% else %}
-                <tr>
-                    <td>작성된 게시글이 없습니다.</td>
-                </tr>
+                <div class="header">
+                    <h2>My Letter Page</h2>
+                </div>
+                <div style= "text-align:center;">
+                    작성된 게시글이 없습니다.<br>
+                </div>
             {% endif %}
             </tbody>
         </table>
-        <button type="button" class="HomeBtn" onclick = "location.href='/letters/'">Home</button><br>
+        <br>
+        <div style= "text-align:center;">
+            <button type="button" class="HomeBtn" onclick = "location.href='/letters/'">Home</button><br>
+        </div>
     </div>
+{% endblock %}
+    
 </body>
 </html>

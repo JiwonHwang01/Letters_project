@@ -1,31 +1,41 @@
-<ul>
-{% if user.is_authenticated %}
-{{user.username}}<br>
-{{user.email}}<br>
-<div>
-편지쓰기 URL 
-<input type="text" name="url_text" id="url_text" value="127.0.0.1:8000/letters/{{user.lettercase_url}}" readonly/>
-<button type="button" class="btn btn-secondary"
-	onclick="copyToClipBoard()">url 복사</button>
-</div>
-<script>
-    function copyToClipBoard() {
-        const content = document.querySelector("#url_text");
-        content.select();
-        document.execCommand("copy");
-        alert("복사되었습니다!");
-      }
-</script>
-<br>
+{% extends 'base.html' %}
 
-<button type="button" class="MyLetterBtn" onclick = "location.href='/letters/mypage/'">My Letters</button>
-<button type="button" class="LogOutBtn" onclick = "location.href='/accounts/logout/'">log out</button><br>
-<button type="button" class="Admin" onclick = "location.href='/admin/'">Admin</button>
+{% block title %}Home{% endblock %}
 
-{% else %}
-<a href="{% url 'login'%}">Log In</a>    <br>
-<button type="button" class="LogInBtn" onclick = "location.href='/accounts/login/'">log in</button>
-<button type="button" class="SignUpBtn" onclick = "location.href='/accounts/signup/'">sign up</button>
-{% endif %}
-{{status}}
-</ul>
+{% block user_info %}
+    {% if user.is_authenticated %}
+        {{ user.username }}님 안녕하세요 ! (email: {{ user.email }})<br>
+        <div>
+            편지쓰기 URL 
+            <input type="text" name="url_text" id="url_text" value="127.0.0.1:8000/letters/{{user.lettercase_url}}" readonly/>
+            <button type="button" class="btn btn-secondary" onclick="copyToClipBoard()">url 복사</button>
+        </div>
+        <script>
+            function copyToClipBoard() {
+                const content = document.querySelector("#url_text");
+                content.select();
+                document.execCommand("copy");
+                alert("복사되었습니다!");
+            }
+        </script>
+        <br>
+        <button type="button" class="MyLetterBtn" onclick="location.href='/letters/mypage/'">My Letters</button>
+        <button type="button" class="LogOutBtn" onclick="location.href='/accounts/logout/'">log out</button><br>
+        <button type="button" class="Admin" onclick="location.href='/admin/'">Admin</button>
+    {% else %}
+        <a href="{% url 'login'%}">Log In</a> <br>
+        <button type="button" class="LogInBtn" onclick="location.href='/accounts/login/'">log in</button>
+        <button type="button" class="SignUpBtn" onclick="location.href='/accounts/signup/'">sign up</button>
+    {% endif %}
+    {{ status }}
+{% endblock %}
+
+{% block content %}
+  {% if request.session.fail_reason %}
+      <p>{{ request.session.fail_reason }}</p>
+    {% with request.session.fail_reason as fail_reason %}
+        {# TODO 여기에 fail_reason을 사용한 추가적인 처리 #}
+    {% endwith %}
+    
+  {% endif %}
+{% endblock %}

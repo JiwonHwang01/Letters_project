@@ -1,132 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>편지 작성</title>
-</head>
-<style type="text/css">
+{% extends 'base.html' %}
+
+{% block title %}편지 작성{% endblock %}
+
+{% block  content%}
+    <style type="text/css">
         .h1 {
             max-width:500px;
             margin: auto;
             padding:10px;
+            text-align: center;
+        }
+        
+        .letter_for_write {
+            width: 100%;
+            background-color:#f1f1f1;
         }
 
-        .content {
-            max-width:500px;
-            margin: auto;
-            padding:10px;
+        #user {
+            height: 32px;
+            width: 100%;
+            border-radius: 0.25em;
+            border: none;
+            font-family: inherit;
+            font-size: inherit;
+            background: none;
+            text-indent: 2px;
+            font-weight: bold; 
         }
-
-		.reply_content {
-			text-align:right	
-		}
-
-		.reply_content .reply{
-			border-radius: 0.5em;
-			display: block;
-			margin: 4px;
-			padding: 3px 10px;
-		}
-
-		.letter_for_write {
-			width: 100%;
-			background-color:#f1f1f1;
-		}
-
-		#user {
-			height: 32px;
-			width: 100%;
-			border-radius: 0.25em;
-			border: none;
-			font-family: inherit;
-			font-size: inherit;
-			background: #FFFFFF;
-		}
-
+        
         #title {
-			height: 32px;
-			width: 100%;
-			border-radius: 0.25em;
-			border: none;
-			font-family: inherit;
-			font-size: inherit;
-			background: #FFFFFF;
-		}
+            background: #FFFFFF;
+        }
+
+        #letter_text {
+            background: #FFFFFF;
+        }
+
 
         #visitor_id {
-			height: 32px;
-			width: 100%;
-			border-radius: 0.25em;
-			border: none;
-			font-family: inherit;
-			font-size: inherit;
-			background: #FFFFFF;
-		}
-
-        textarea {
-			width: 100%;
+            height: 32px;
+            width: 100%;
+            border-radius: 0.25em;
+            border: none;
             font-family: inherit;
-            font-size: 100%;
-			resize: none;
-			border-radius: 0.25em;
-			padding-block: 10px;
-			border: 0px;
-			background: #FFFFFF;
+            font-size: inherit;
+            background: #FFFFFF;
         }
-
-		.td_title {
-			background-color: #d8d8d8
-		}
     </style>
-<body>
-    
-    {% if user.is_authenticated %}
-    <h1>{{ user.username }}님께 편지 작성</h1>
+    <body>
+        
+        {% if user.is_authenticated %}
+        <h1 class="h1">{{ user.username }}님께 편지 작성</h1>
 
-    <form method="post" action="{% url 'post_letter' %}">
-        {% csrf_token %}
-        <div class="content">
+        <form method="post" action="{% url 'post_letter' %}">
+            {% csrf_token %}
+            <div class="content">
 
-            <table class="letter_for_write">
-                <tbody>
-                    <tr>
-                        <td class="td_title" style="text-align:center; width:20%;">받는사람</td>
-                        <td style="padding:5px;">
-                            <input type="text" name="user" id="user" value="{{user.username}}" readonly/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_title" style="text-align:center; width:20%;">제목</td>
-                        <td style="padding:5px;">
-                            <input type="text" name="title" id="title"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_title" style="text-align:center; width:20%;">작성자 ID</td>
-                        <td style="padding:5px;">
-                            <input type="text" name="visitor_id" id="visitor_id"/>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="td_title" style="text-align:center;">내용</td>
-                        <td style="padding:5px;">
-                            <textarea name="letter_text" id="letter_text" rows="10"></textarea>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div style="text-align:left; float:left;">
-                <a href="{% url 'index' %}" > Home</a>
-            </div>
-            <div style="text-align:right; float:right;">
-                <button type = submit>작성</button>
-            </div>
-    </form>
-    
-    {% else %}
-        Wrong Letter URL Code.
-    {% endif %}
+                <table class="letter_for_write">
+                    <tbody>
+                        <tr>
+                            <td class="td_title" style="text-align:center; width:20%;">받는사람</td>
+                            <td style="padding:5px;">
+                                <input type="text" name="user" id="user" value="{{user.username}}" readonly/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td_title" style="text-align:center; width:20%;">제목</td>
+                            <td style="padding:5px;">
+                                <input type="text" name="title" id="title"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td_title" style="text-align:center; width:20%;">작성자 ID</td>
+                            <td style="padding:5px;">
+                                <input type="text" name="visitor_id" id="visitor_id"/>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="td_title" style="text-align:center;">내용</td>
+                            <td style="padding:5px;">
+                                <textarea name="letter_text" id="letter_text" rows="10"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align:left; float:left;">
+                    <a href="{% url 'index' %}" > Home</a>
+                </div>
+                <div style="text-align:right; float:right;">
+                    <button type = submit>작성</button>
+                </div>
+        </form>
+        
+        {% else %}
+            Wrong Letter URL Code.
+        {% endif %}
 
-</body>
-</html>
+    </body>
+{% endblock  %}
