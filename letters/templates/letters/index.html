@@ -7,7 +7,7 @@
         {{ user.username }}님 안녕하세요 ! (email: {{ user.email }})<br>
         <div>
             편지쓰기 URL 
-            <input type="text" name="url_text" id="url_text" value="127.0.0.1:8000/letters/{{user.lettercase_url}}" readonly/>
+            <input type="text" name="url_text" id="url_text" value="http://43.201.2.126/letters/{{user.lettercase_url}}" readonly/>
             <button type="button" class="btn btn-secondary" onclick="copyToClipBoard()">url 복사</button>
         </div>
         <script>
