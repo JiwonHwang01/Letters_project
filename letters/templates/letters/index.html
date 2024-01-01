@@ -20,7 +20,10 @@
         </script>
         <br>
         <button type="button" class="MyLetterBtn" onclick="location.href='/letters/mypage/'">My Letters</button>
-        <button type="button" class="LogOutBtn" onclick="location.href='/accounts/logout/'">log out</button><br>
+        <form action="/accounts/logout/" method = "post">
+            {% csrf_token %}
+            <input type = "submit" class="LogOutBtn" value="log out" />
+        </form>
         <button type="button" class="Admin" onclick="location.href='/admin/'">Admin</button>
     {% else %}
         <a href="{% url 'login'%}">Log In</a> <br>
