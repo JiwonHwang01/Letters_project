@@ -2,6 +2,16 @@
 
 {% block title %}Home{% endblock %}
 
+{% block fail_reason %}
+    {% if request.session.fail_reason %}
+    <p>{{ request.session.fail_reason }}</p>
+    {% with request.session.fail_reason as fail_reason %}
+
+    {% endwith %}
+
+    {% endif %}
+{% endblock  %}
+
 {% block user_info %}
     {% if user.is_authenticated %}
         {{ user.username }}님 안녕하세요 ! (email: {{ user.email }})<br>
@@ -24,21 +34,20 @@
             {% csrf_token %}
             <input type = "submit" class="LogOutBtn" value="log out" />
         </form>
-        <button type="button" class="Admin" onclick="location.href='/admin/'">Admin</button>
+        
     {% else %}
+    <div class = 'login_field'>
         <a href="{% url 'login'%}">Log In</a> <br>
         <button type="button" class="LogInBtn" onclick="location.href='/accounts/login/'">log in</button>
         <button type="button" class="SignUpBtn" onclick="location.href='/accounts/signup/'">sign up</button>
+    </div>
     {% endif %}
-    {{ status }}
-{% endblock %}
-
-{% block content %}
-  {% if request.session.fail_reason %}
-      <p>{{ request.session.fail_reason }}</p>
-    {% with request.session.fail_reason as fail_reason %}
-        {# TODO 여기에 fail_reason을 사용한 추가적인 처리 #}
-    {% endwith %}
     
-  {% endif %}
 {% endblock %}
+{% block admin %}
+    {% if user.is_superuser %}
+    <button type="button" class="Admin" onclick="location.href='/admin/'">Admin</button>
+
+    {% else %}
+    {% endif %}
+{% endblock  %}

@@ -76,13 +76,21 @@
 </head>
 <body>
     <ul>
+		{% block fail_reason %}
+			<!-- 오류 표시 -->
+
+		{% endblock %}
         {% block user_info %}
             <!-- 사용자 정보 표시 -->
         {% endblock %}
+		{% block admin %}
+			<!-- 어드민 권한만 접근 가능-->
+		{% endblock %}
     </ul>
-
     <div class="content">
-        {% block content %}{% endblock %}
+        {% block content %}
+			<!-- 여기에 추가로 넣을게 있을까? -->
+		{% endblock %}
     </div>
 
     <!-- JavaScript 코드 -->
