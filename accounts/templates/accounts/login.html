@@ -30,46 +30,30 @@
             margin-right: 30px;
             gap:20px;
         }
-        .login_label{
-            color: #FDFFEC;
-            font-family: 'hanna';
-            font-size: 55px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
+        .login-label{
             width: 200px; /* 라벨의 너비 조절 */
-            display: inline-block;
-        }
-        .textbox{
-            width: 399px;
-            height: 35px;
-            border-radius: 135.5px;
-            background-color: #FDFFEC;
-            font-size: 55px;
-            font-family: 'hanna';
-            padding: 20px;
         }
         .logInBtn-container{
-            display: flex;
-            background: url('/../static/img/logInBtn.png');
-            background-size: cover;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            margin-left: 10px;
+        }
+        .logInBtn-container:active .logInBtn-bg{
+            transform: scale(0.9);
+            
+        }
+        .logInBtn-bg{
+            z-index: -1;
+            position: absolute;
+            
+            background: url('/../static/img/logInBtn.png') center/cover no-repeat;
             width:170px;
             height:156px;
-            align-items: center;
-            justify-content:center; 
-            margin-left: 10px;
-        }
-        .logInBtn-container:active{
-            display: flex;
-            background: url('/../static/img/logInBtn.png');
-            background-size: cover;
-            width:150px;
-            height:136px;
-            align-items: center;
-            justify-content:center; 
-            margin-left: 10px;
+            transition: transform 0.3s ease;
         }
         .logInBtn{
+            z-index: 1;
             color: #FDFFEC;
             font-family: 'hanna';
             font-size: 55px;
@@ -84,7 +68,6 @@
         }
         .logInBtn:active{
             border: #000000;
-            border-width: 4px;
         }
     </style>
 
@@ -98,15 +81,16 @@
             <div class="login-container">
                 <div class = "label-input-container">
                     <div class="id-container">
-                        <label width= 200px class= "login_label">아이디</label>
+                        <label width= 200px class= "login-label">아이디</label>
                         <input class="textbox" type="text" name="username" id="username">
                     </div>
                     <div class="pwd-container">
-                        <label class= "login_label">패스워드</label>
+                        <label class= "login-label">패스워드</label>
                         <input style="font-family:'serif'" class="textbox" type="password" name="password" id="password">
                     </div>
                 </div>
                 <div class = "logInBtn-container">
+                    <div class ="logInBtn-bg"></div>
                     <input type="submit" value="로그인" class="logInBtn">
                 </div>
             </div>

@@ -12,12 +12,23 @@
     {% endif %}
 {% endblock  %}
 
+{% block style %}
+    <style>
+        .textbox{
+            width:870px;
+            font-size: 45px;
+        }
+    </style>
+{% endblock  %}
+
 {% block user_info %}
     {% if user.is_authenticated %}
-        {{ user.username }}님 안녕하세요 ! (email: {{ user.email }})<br>
+        <label class="user-info">
+            {{ user.username }}님 안녕하세요 ! (email: {{ user.email }})<br>
+        </label>
         <div>
-            편지쓰기 URL 
-            <input type="text" name="url_text" id="url_text" value="http://43.201.2.126/letters/{{user.lettercase_url}}" readonly/>
+            <label>편지쓰기 URL </label>
+            <input type="text" class="textbox" name="url_text" id="url_text" value="http://43.201.2.126/letters/{{user.lettercase_url}}" readonly/>
             <button type="button" class="btn btn-secondary" onclick="copyToClipBoard()">url 복사</button>
         </div>
         <script>

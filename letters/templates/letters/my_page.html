@@ -12,7 +12,9 @@
             .board {
                 width: 100%
             }
-    
+            .odd_bgcolor{
+                background-color:green;
+            }
             .even_bgcolor {
                 background-color:#e8efff;
             }
@@ -38,7 +40,7 @@
                 {% for data in letter_list %}
                     {% if data.user == username %}
 
-                    <tr class="{% if forloop.counter|divisibleby:2 %}even_bgcolor{% endif %}">
+                    <tr class="{% if forloop.counter|divisibleby:2 %}even_bgcolor{%else%}odd_bgcolor{% endif %}">
                         <td style="text-align:center;">{{ forloop.counter }}</td>
                         
                         <td>

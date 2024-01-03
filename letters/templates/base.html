@@ -5,76 +5,101 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Default Title{% endblock %}</title>
     <!-- CSS나 meta 태그 추가 -->
-    <style type="text/css">
-        .content {
-            max-width:500px;
-            margin: auto;
-            padding:10px;
-        }
-
-        .header {
-            text-align: center;
-        }
-        
-		.reply_content {
-			text-align:right	
-		}
-
-		.reply_content .reply{
-			border-radius: 0.5em;
-			display: block;
-			margin: 4px;
-			padding: 3px 10px;
-		}
-
-		.letter_for_read {
-			width: 100%;
-			background-color:#f1f1f1;
-		}
-
-		#title {
-			height: 32px;
-			width: 100%;
-			border-radius: 0.5em;
-			border: none;
-			font-family: inherit;
-			font-size: inherit;
-			background: none;
-		}
-
-        textarea {
-			width: 100%;
-            font-family: inherit;
-            font-size: 100%;
-			resize: none;
-			border-radius: 0.5em;
-			padding-block: 10px;
-			border: 0px;
-			background: none;
-        }
-
-		.td_title {
-			background-color: #d8d8d8
-		}
-		@media only screen and (max-width: 600px) {
-			/* 모바일 화면에 대한 스타일 지정 */
-			body {
-				background-color: lightblue;
+    <link rel="stylesheet" href='../../static/css/style.css'>
+        <style type="text/css">
+            body{
+                background: #013134;
+            }
+            label{
+                color: #FDFFEC;
+                font-family: 'hanna';
+                font-size: 55px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                display: inline-block;
+            }
+            .textbox{
+                width: 399px;
+                height: 35px;
+                border-radius: 135.5px;
+                background-color: #FDFFEC;
+                font-size: 55px;
+                font-family: 'hanna';
+                padding: 20px;
 			}
-		  }
-		/*
-		@media only screen and (min-width: 601px) and (max-width: 1024px) {
-		/* 태블릿 화면에 대한 스타일 지정 
-		}
-		*/
-		
-		  
-		@media only screen and (min-width: 1025px) {
-		/* 데스크탑 화면에 대한 스타일 지정 */
-		}
+			.content {
+				max-width:500px;
+				margin: auto;
+				padding:10px;
+			}
+
+			.header {
+				text-align: center;
+			}
+			
+			.reply_content {
+				text-align:right	
+			}
+
+			.reply_content .reply{
+				border-radius: 0.5em;
+				display: block;
+				margin: 4px;
+				padding: 3px 10px;
+			}
+
+			.letter_for_read {
+				width: 100%;
+				background-color:#f1f1f1;
+			}
+
+			#title {
+				height: 32px;
+				width: 100%;
+				border-radius: 0.5em;
+				border: none;
+				font-family: inherit;
+				font-size: inherit;
+				background: none;
+			}
+
+			textarea {
+				width: 100%;
+				font-family: inherit;
+				font-size: 100%;
+				resize: none;
+				border-radius: 0.5em;
+				padding-block: 10px;
+				border: 0px;
+				background: none;
+			}
+
+			.td_title {
+				background-color: #d8d8d8
+			}
+			@media only screen and (max-width: 1100px) {
+				/* 모바일 화면에 대한 스타일 지정 */
+				body {
+					background-color: lightblue;
+				}
+			}
+			/*
+			@media only screen and (min-width: 601px) and (max-width: 1024px) {
+			/* 태블릿 화면에 대한 스타일 지정 
+			}
+			*/
+			
+			
+			@media only screen and (min-width: 1025px) {
+			/* 데스크탑 화면에 대한 스타일 지정 */
+			}
     </style>
 </head>
 <body>
+	{% block style %}
+			<!-- style -->
+	{% endblock %}
     <ul>
 		{% block fail_reason %}
 			<!-- 오류 표시 -->
@@ -89,8 +114,8 @@
     </ul>
     <div class="content">
         {% block content %}
-			<!-- 여기에 추가로 넣을게 있을까? -->
-		{% endblock %}
+		
+		{% endblock  %}
     </div>
 
     <!-- JavaScript 코드 -->
