@@ -22,12 +22,14 @@
             top: 75%;    /* 화면 상단에서 10% 떨어진 위치에 배치 */
             left: 15%;   /* 화면 왼쪽에서 20% 떨어진 위치에 배치 */
             width: 70%; 
+            gap: 30px;
+            margin-left: 10px;
+            margin-right: 10px;
         }
         .label-input-container {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            margin-right: 30px;
             gap:20px;
         }
         .login-label{
@@ -36,18 +38,16 @@
         .logInBtn-container{
             display: inline-block;
             position: relative;
-            overflow: hidden;
-            margin-left: 10px;
         }
         .logInBtn-container:active .logInBtn-bg{
             transform: scale(0.9);
-            
         }
         .logInBtn-bg{
             z-index: -1;
             position: absolute;
-            
-            background: url('/../static/img/logInBtn.png') center/cover no-repeat;
+            top:-75%;
+            left:15px;
+            background: url('/../static/img/logInBtn.png') no-repeat;
             width:170px;
             height:156px;
             transition: transform 0.3s ease;
