@@ -18,47 +18,120 @@
             width:870px;
             font-size: 45px;
         }
+        .index_container{
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+        }
+        .no-user-container {
+            display: flex;
+            position: absolute;
+            align-items: center;
+            justify-content: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            width: 80%; 
+        }
+        .logInBtn-container,
+        .signUpBtn-container {
+            display: flex; /* 추가: display를 flex로 설정 */
+            position: absolute;
+            align-items: center; 
+        }
+        .logInBtn-container{
+            top: 50%;
+            left: 20vh;
+            transform: translateY(-50%);
+        }
+        .logInBtn-container:active .logInBtn-bg{
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .logInBtn-bg{
+            z-index: -1;
+            position: absolute;
+            top:-75%;
+            left:-5%;
+            background: url('/../static/img/tologInBtn.png') no-repeat;
+            width:252px;
+            height:176px;
+        }
+        .signUpBtn-container{
+            top: 50%;
+            left: 5vh;
+            transform: translateY(-50%);
+        }
+        .signUpBtn-container:active .signUpBtn-bg{
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .signUpBtn-bg{
+            z-index: -1;
+            position: absolute;
+            top:-75%;
+            left:-5%;
+            background: url('/../static/img/tosignUpBtn.png') no-repeat;
+            width:252px;
+            height:176px;
+        }
     </style>
-{% endblock  %}
-
-{% block user_info %}
-    {% if user.is_authenticated %}
-        <label class="user-info">
-            {{ user.username }}님 안녕하세요 ! (email: {{ user.email }})<br>
-        </label>
-        <div>
-            <label>편지쓰기 URL </label>
-            <input type="text" class="textbox" name="url_text" id="url_text" value="http://43.201.2.126/letters/{{user.lettercase_url}}" readonly/>
-            <button type="button" class="btn btn-secondary" onclick="copyToClipBoard()">url 복사</button>
-        </div>
-        <script>
-            function copyToClipBoard() {
-                const content = document.querySelector("#url_text");
-                content.select();
-                document.execCommand("copy");
-                alert("복사되었습니다!");
-            }
-        </script>
-        <br>
-        <button type="button" class="MyLetterBtn" onclick="location.href='/letters/mypage/'">My Letters</button>
-        <form action="/accounts/logout/" method = "post">
-            {% csrf_token %}
-            <input type = "submit" class="LogOutBtn" value="log out" />
-        </form>
-        
-    {% else %}
-    <div class = 'login_field'>
-        <a href="{% url 'login'%}">Log In</a> <br>
-        <button type="button" class="LogInBtn" onclick="location.href='/accounts/login/'">log in</button>
-        <button type="button" class="SignUpBtn" onclick="location.href='/accounts/signup/'">sign up</button>
-    </div>
-    {% endif %}
     
-{% endblock %}
-{% block admin %}
-    {% if user.is_superuser %}
-    <button type="button" class="Admin" onclick="location.href='/admin/'">Admin</button>
-
-    {% else %}
-    {% endif %}
 {% endblock  %}
+{% block content %}
+    <div class = 'index_container'>
+        <div class="index-logo">
+            <img src="/../static/img/indexLogo.png" alt="Main Logo">
+        </div>
+        {% block user_info %}
+            {% if user.is_authenticated %}
+                <label class="user-info">
+                    {{ user.username }}님 안녕하세요 ! (email: {{ user.email }})<br>
+                </label>
+                <div>
+                    <label>편지쓰기 URL </label>
+                    <input type="text" class="textbox" name="url_text" id="url_text" value="http://43.201.2.126/letters/{{user.lettercase_url}}" readonly/>
+                    <button type="button" class="btn btn-secondary" onclick="copyToClipBoard()">url 복사</button>
+                </div>
+                <script>
+                    function copyToClipBoard() {
+                        const content = document.querySelector("#url_text");
+                        content.select();
+                        document.execCommand("copy");
+                        alert("복사되었습니다!");
+                    }
+                </script>
+                <br>
+                <button type="button" class="MyLetterBtn" onclick="location.href='/letters/mypage/'">My Letters</button>
+                <form action="/accounts/logout/" method = "post">
+                    {% csrf_token %}
+                    <input type = "submit" class="LogOutBtn" value="log out" />
+                </form>
+                
+            {% else %}
+
+        <div class = "no-user-container">
+            <div class = "logInBtn-container">
+                <div class ="logInBtn-bg"></div>
+                <input type="button" class="LogInBtn" onclick="location.href='/accounts/login/'" value="로그인">
+            </div>
+            <div class = "signUpBtn-container">
+                <div class ="signUpBtn-bg"></div>
+                <input type="button" class="SignUpBtn" onclick="location.href='/accounts/signup/'" value="가입">
+            </div>
+        </div>
+            
+            {% endif %}
+
+        {% endblock %}
+        {% block admin %}
+            {% if user.is_superuser %}
+            <button type="button" class="Admin" onclick="location.href='/admin/'">Admin</button>
+
+            {% else %}
+            {% endif %}
+        {% endblock  %}
+    </div>
+{% endblock content %}

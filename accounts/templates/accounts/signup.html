@@ -1,41 +1,94 @@
 {% extends "accounts_base.html" %}
 {% block content %}
 <style>
+    form{
+        position: fixed;
+        left: 5%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        top: 5%;
+    }
     .signup-label{
-        width: 400px;
+        width: 40%;
+    }
+    .textbox{
+        width : 50%;
+    }
+    .signUpBtn-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        height: 170px;
+    }
+    .signUpBtn-container:active .signUpBtn-bg{
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    }
+    .signUpBtn-bg{
+        z-index: -1;
+        background: url('/../static/img/logInBtn.png') no-repeat;
+        width:170px;
+        height:156px;
+    }
+    .signUpBtn{
+        z-index: -1;
+        position: absolute;
+        color: #FDFFEC;
+        font-family: 'hanna';
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        border: none;
+        background: none;
+        background-size: cover;
+        width:200px;
+
+    }
+    .signUpBtn:active{
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
     }
 </style>
 <div class="container my-3">
     <form method="post" action="{% url 'signup' %}">
         {% csrf_token %}
-        
-        <div class="mb-3">
-            <label for="username" class="signup-label">사용자 이름</label>
-            <input type="text" class="textbox" name="username" id="username"
-                   value="{{ form.username.value|default_if_none:'' }}">
+        <div class = "signup-container">
+            <div class="mb-3">
+                <label for="username" class="signup-label">사용자 이름</label>
+                <input type="text" class="textbox" name="username" id="username"
+                    value="{{ form.username.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="password1" class="signup-label">비밀번호</label>
+                <input type="password" class="textbox" name="password1" id="password1"
+                    value="{{ form.password1.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="password2" class="signup-label">비밀번호 확인</label>
+                <input type="password" class="textbox" name="password2" id="password2"
+                    value="{{ form.password2.value|default_if_none:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="signup-label">이메일</label>
+                <input type="text" class="textbox" name="email" id="email"
+                    value="{{ form.email.value|default_if_none:'' }}">
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="password1" class="signup-label">비밀번호</label>
-            <input type="password" class="textbox" name="password1" id="password1"
-                   value="{{ form.password1.value|default_if_none:'' }}">
+        <div class = "signUpBtn-container">
+            <div class ="signUpBtn-bg"></div>
+            <button type="submit" class="signUpBtn">가입</button>
         </div>
-        <div class="mb-3">
-            <label for="password2" class="signup-label">비밀번호 확인</label>
-            <input type="password" class="textbox" name="password2" id="password2"
-                   value="{{ form.password2.value|default_if_none:'' }}">
-        </div>
-        <div class="mb-3">
-            <label for="email" class="signup-label">이메일</label>
-            <input type="text" class="textbox" name="email" id="email"
-                   value="{{ form.email.value|default_if_none:'' }}">
-        </div>
-        {{ form.non_field_errors }}
-        {% for field in form %}
-            <p>
-            {{ field.errors }}
-            </p>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary">생성하기</button>
+        <label>
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                <p>
+                {{ field.errors }}
+                </p>
+            {% endfor %}
+        </label>
     </form>
 </div>
 {% endblock %}

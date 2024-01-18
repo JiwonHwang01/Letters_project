@@ -1,6 +1,6 @@
 from .base import *
 
-ALLOWED_HOSTS = ['43.201.2.126']
+ALLOWED_HOSTS = ['61.97.190.224']
 
 STATICFILES_DIRS = [
     # 경로 추가, 필요에 따라 더 추가
