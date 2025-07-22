@@ -187,7 +187,11 @@
         <div class="postbox-container">
             <div class="postbox-icon" onclick="location.href='/letters/mypage/'">
                 {% load static %}
-                <img src="{% static 'img/postbox.png' %}" alt="우편함" class="postbox-image">
+                {% if my_letters|length > 0 %}
+                    <img src="{% static 'img/postbox_not_empty.png' %}" alt="편지가 있는 우편함" class="postbox-image">
+                {% else %}
+                    <img src="{% static 'img/postbox.png' %}" alt="빈 우편함" class="postbox-image">
+                {% endif %}
                 {% if my_letters|length > 0 %}
                     <div class="notification-badge{% if my_letters|length >= 100 %} extra-large{% elif my_letters|length >= 10 %} large{% endif %}">
                         {% if my_letters|length > 999 %}999+{% else %}{{ my_letters|length }}{% endif %}
