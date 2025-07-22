@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from .utils import generate_letter_hash_id
 
 class User(AbstractUser):
-    password = models.CharField(max_length=100)
     lettercase_url = models.CharField(max_length=200, default = None, null=True, blank = True)
     
 class LetterCase(models.Model):
@@ -16,7 +15,6 @@ class LetterCase(models.Model):
 
 class Letter(models.Model):
     visitor_id = models.CharField(max_length=50)
-    visitor_pw = models.CharField(max_length=50)
     title = models.CharField(max_length=100)
     letter_text = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
