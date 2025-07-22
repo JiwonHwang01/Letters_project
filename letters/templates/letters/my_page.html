@@ -77,7 +77,7 @@
     <div class="letters-container">
         {% for data in letter_list %}
             {% if data.user == username %}
-                <div class="letter-card" onclick="location.href='{% url 'letter_detail' data.id %}'">
+                <div class="letter-card" onclick="location.href='{% url 'letter_detail' data.hash_id %}'">
                     <div class="letter-title">{{ data.title }}</div>
                     <div class="letter-meta">
                         <div class="letter-author">✍️ {{ data.visitor_id }}</div>
