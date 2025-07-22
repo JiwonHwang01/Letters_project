@@ -34,23 +34,41 @@ def generate_user_slug_code(length=12, existing_codes_checker=None):
     existing_codes_checker: 중복 확인 함수 (예: lambda code: User.objects.filter(lettercase_url=code).exists())
     """
     from letters.models import User
+    from django.db import DatabaseError
     
     if existing_codes_checker is None:
-        existing_codes_checker = lambda code: User.objects.filter(lettercase_url=code).exists()
+        def safe_checker(code):
+            try:
+                return User.objects.filter(lettercase_url=code).exists()
+            except DatabaseError:
+                # DB 오류 시 안전하게 True 반환 (재시도 유도)
+                return True
+        existing_codes_checker = safe_checker
     
     code = None
-    max_attempts = 10  # 무한 루프 방지
+    max_attempts = 50  # 시도 횟수 증가
     attempts = 0
     
-    while (not code or existing_codes_checker(code)) and attempts < max_attempts:
-        code = generate_random_slug_code(length)
-        attempts += 1
-    
-    if attempts >= max_attempts:
-        # 최대 시도 횟수 도달 시 더 긴 코드 생성
-        code = generate_random_slug_code(length + 4)
-    
-    return code
+    try:
+        while (not code or existing_codes_checker(code)) and attempts < max_attempts:
+            code = generate_random_slug_code(length)
+            attempts += 1
+        
+        if attempts >= max_attempts:
+            # 최대 시도 횟수 도달 시 더 긴 코드로 재시도
+            for extended_length in [length + 4, length + 8, length + 16]:
+                code = generate_random_slug_code(extended_length)
+                if not existing_codes_checker(code):
+                    break
+            else:
+                # 모든 시도가 실패하면 예외 발생
+                raise ValueError("고유한 사용자 코드 생성에 실패했습니다.")
+        
+        return code
+        
+    except Exception as e:
+        # 모든 다른 오류는 ValueError로 변환
+        raise ValueError(f"사용자 코드 생성 중 오류 발생: {str(e)}")
 
 def verify_letter_hash_id(hash_id, letter_id):
     """

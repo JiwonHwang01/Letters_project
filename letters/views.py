@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db import transaction
+from django.contrib import messages
 from letters.models import User, Letter
 from django.contrib.auth import authenticate, login, get_user
 from letters.forms import LetterForm
@@ -34,25 +36,33 @@ def write_letter(request, token):
 def post_letter(request):
     if request.method == 'POST':
         try:
-            user = User.objects.get(username = request.POST.get("user"))
+            user = User.objects.get(username=request.POST.get("user"))
             form = LetterForm(request.POST)
             
         except User.DoesNotExist:
-            # print("PostLetter Exception : DoesNotExist")
             request.session['fail_reason'] = 'user_not_exist'
             return redirect('/letters/')
         
-        print(form)
         if form.is_valid():
-                letter = form.save(commit=False)
-                # print("valid")
-                letter.user = user
-                letter.save()
-                return redirect('/letters/')  # 익명 편지 작성 성공
+            try:
+                # 데이터베이스 트랜잭션으로 편지 저장 과정 보호
+                with transaction.atomic():
+                    letter = form.save(commit=False)
+                    letter.user = user
+                    letter.save()
+                    
+                return redirect('/letters/')  # 편지 작성 성공
+                
+            except Exception as e:
+                # 편지 저장 중 오류 발생시 사용자에게 알림
+                request.session['fail_reason'] = 'letter_save_error'
+                return redirect('/letters/')
+        else:
+            # 폼 검증 실패
+            request.session['fail_reason'] = 'form_validation_error'
+            return redirect('/letters/')
     
     else:
-        form = LetterForm()
         request.session['fail_reason'] = 'post_request_invalid'
-
-    return redirect('/letters/')
+        return redirect('/letters/')
     # 실패이유는 request.session.pop('fail-reason',None)을 사용해서 세션 꺼내쓰기
