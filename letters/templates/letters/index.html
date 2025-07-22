@@ -172,6 +172,70 @@
         100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
     }
 
+    /* 메시지 알림 스타일 */
+    .alert {
+        padding: 1rem 1.5rem;
+        margin-bottom: var(--spacing-md);
+        border-radius: var(--border-radius);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        animation: slideInDown 0.5s ease-out;
+    }
+    
+    .alert-success {
+        background: linear-gradient(135deg, #10b981, #34d399);
+        color: white;
+        border: 2px solid #065f46;
+    }
+    
+    .alert-error {
+        background: linear-gradient(135deg, #ef4444, #f87171);
+        color: white;
+        border: 2px solid #991b1b;
+    }
+    
+    .alert-close {
+        background: none;
+        border: none;
+        color: inherit;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0;
+        margin-left: 1rem;
+        opacity: 0.8;
+        transition: opacity 0.2s ease;
+    }
+    
+    .alert-close:hover {
+        opacity: 1;
+    }
+    
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes slideOutUp {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+    }
+
 </style>
 {% endblock %}
 
@@ -180,6 +244,16 @@
     <div class="logo">📝 Letters</div>
     <div class="subtitle">익명으로 마음을 전해보세요</div>
 </div>
+
+<!-- 성공/오류 메시지 표시 -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} slide-in" id="message-alert">
+            {{ message }}
+            <button type="button" class="alert-close" onclick="closeAlert()">&times;</button>
+        </div>
+    {% endfor %}
+{% endif %}
 
 {% if user.is_authenticated %}
     <!-- 우편함 상태 표시 섹션 -->
@@ -275,5 +349,26 @@
             button.className = originalClass;
         }, 2000);
     }
+
+    // 알림 닫기 함수
+    function closeAlert() {
+        const alert = document.getElementById('message-alert');
+        if (alert) {
+            alert.style.animation = 'slideOutUp 0.5s ease-out forwards';
+            setTimeout(() => {
+                alert.remove();
+            }, 500);
+        }
+    }
+
+    // 페이지 로드 시 알림 자동 닫기 (5초 후)
+    document.addEventListener('DOMContentLoaded', function() {
+        const alert = document.getElementById('message-alert');
+        if (alert) {
+            setTimeout(() => {
+                closeAlert();
+            }, 5000);
+        }
+    });
 </script>
 {% endblock %}

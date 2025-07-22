@@ -51,6 +51,8 @@ def post_letter(request):
                     letter.user = user
                     letter.save()
                     
+                # 성공 메시지 추가
+                messages.success(request, f'✉️ {user.username}님에게 편지가 성공적으로 전달되었습니다!')
                 return redirect('/letters/')  # 편지 작성 성공
                 
             except Exception as e:
