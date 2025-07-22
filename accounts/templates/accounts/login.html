@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}로그인 - Letters{% endblock %}
+
+{% block content %}
+    <div class="header">
+        <div class="logo">🔑 로그인</div>
+        <div class="subtitle">편지함에 접속하세요</div>
+    </div>
+
+    <div class="card">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                <div class="alert alert-error">
+                    {% for field in form %}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endif %}
+            
+            <div class="form-group">
+                <label class="form-label" for="username">아이디</label>
+                <input type="text" class="form-input" name="username" id="username" 
+                       placeholder="아이디를 입력하세요" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="password">비밀번호</label>
+                <input type="password" class="form-input" name="password" id="password" 
+                       placeholder="비밀번호를 입력하세요" required>
+            </div>
+            
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary btn-full">
+                    🔑 로그인
+                </button>
+            </div>
+        </form>
+        
+        <div class="text-center mt-3">
+            <p class="text-secondary">
+                계정이 없으신가요? 
+                <a href="{% url 'signup' %}" style="color: var(--primary-color); text-decoration: none;">
+                    회원가입하기
+                </a>
+            </p>
+        </div>
+    </div>
+    
+    <div class="text-center mt-2">
+        <a href="{% url 'index' %}" class="btn btn-outline">
+            🏠 홈으로 돌아가기
+        </a>
+    </div>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ letter.title }} - Letters{% endblock %}
+
+{% block style %}
+    <style>
+        .letter-content {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .letter-header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .letter-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .letter-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .letter-body {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: var(--background-color);
+            border-radius: 12px;
+            padding: 20px;
+            white-space: pre-wrap;
+            min-height: 200px;
+        }
+        
+        .letter-author {
+            text-align: right;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="header">
+        <div class="logo">📝 편지 읽기</div>
+        <div class="subtitle">받은 편지를 확인하세요</div>
+    </div>
+
+    <div class="letter-content">
+        <div class="letter-header">
+            <div class="letter-title">{{ letter.title }}</div>
+            <div class="letter-date">📅 {{ letter.pub_date|date:'Y년 m월 d일' }}</div>
+        </div>
+        
+        <div class="letter-body">{{ letter.letter_text }}</div>
+        
+        <div class="letter-author">
+            ✍️ {{ letter.visitor_id }}
+        </div>
+    </div>
+    
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary btn-full" onclick="location.href='{% url 'my_page' %}'">
+            📬 편지함으로 돌아가기
+        </button>
+    </div>
+{% endblock %}

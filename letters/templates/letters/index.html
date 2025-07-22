@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block title %}Letters - 편지함{% endblock %}
+
+{% block style %}
+<style>
+    /* URL 입력 그룹 스타일 */
+    .url-input-group {
+        display: flex;
+        gap: var(--spacing-sm);
+        flex-direction: column;
+    }
+    
+    .url-input-group .form-input {
+        font-family: 'Courier New', monospace;
+        text-align: center;
+        font-size: 0.9rem;
+        background: var(--background-secondary);
+        border-color: #CBD5E0;
+    }
+    
+    @media (min-width: 768px) {
+        .url-input-group {
+            flex-direction: row;
+        }
+        
+        .url-input-group .form-input {
+            text-align: left;
+            font-size: 1rem;
+        }
+    }
+    
+    /* 애니메이션 */
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .slide-in {
+        animation: slideIn 0.6s ease-out;
+    }
+    
+    /* 버튼 복사 효과 */
+    .btn-copied {
+        background: linear-gradient(135deg, #10b981, #34d399) !important;
+        animation: pulse 0.6s ease-out;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <div class="logo">📝 Letters.io</div>
+    <div class="subtitle">내 URL을 친구들에게 공유해보세요!</div>
+</div>
+
+{% if user.is_authenticated %}
+    <div class="card slide-in">
+        <div class="card-header">
+            <div class="card-title">안녕하세요, <span class="text-accent">{{ user.username }}</span>님!</div>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">📮 우편함 URL</label>
+            <div class="url-input-group">
+                <input type="text" class="form-input" id="url_text" 
+                       value="http://127.0.0.1:8000/letters/{{user.lettercase_url}}" readonly>
+                <button type="button" class="btn btn-secondary" onclick="copyToClipBoard()" id="copy-btn">
+                    📋 복사
+                </button>
+            </div>
+        </div>
+        
+        <div class="feature-grid">
+            <div class="feature-card" onclick="location.href='/letters/mypage/'">
+                <div class="feature-icon">📬</div>
+                <div class="feature-text">내 편지함</div>
+            </div>
+        </div>
+        
+        <div class="btn-group mt-md">
+            <form action="/accounts/logout/" method="post" style="width: 100%;">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-outline btn-full" value="로그아웃">
+            </form>
+        </div>
+    </div>
+    
+    {% if user.is_superuser %}
+        <div class="card">
+            <button type="button" class="btn btn-primary btn-full" onclick="location.href='/admin/'">
+                관리자 페이지
+            </button>
+        </div>
+    {% endif %}
+    
+{% else %}
+    <div class="welcome-card slide-in">
+        <div class="welcome-section">
+            <h3>익명의 편지를 주고받아보세요</h3>
+        </div>
+        
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-full" onclick="location.href='/accounts/login/'">
+                로그인
+            </button>
+            <button type="button" class="btn btn-outline btn-full" onclick="location.href='/accounts/signup/'">
+                회원가입
+            </button>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block script %}
+<script>
+    function copyToClipBoard() {
+        const content = document.querySelector("#url_text");
+        const button = document.querySelector("#copy-btn");
+        
+        // 클립보드에 복사
+        content.select();
+        document.execCommand("copy");
+        
+        // 버튼 효과
+        const originalText = button.textContent;
+        const originalClass = button.className;
+        
+        button.textContent = "✅ 복사됨!";
+        button.className = button.className.replace('btn-secondary', 'btn-copied');
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.className = originalClass;
+        }, 2000);
+    }
+</script>
+{% endblock %}
