@@ -13,17 +13,17 @@
 /* CSS 변수 정의 */
 :root {
     /* 브랜드 컬러 */
-    --primary-color: #4A90E2;
-    --primary-dark: #357ABD;
-    --primary-light: #6FA8F5;
+    --primary-color: #E67E22;
+    --primary-dark: #D35400;
+    --primary-light: #F39C12;
     --secondary-color: #F5A623;
-    --accent-color: #BD10E0;
+    --accent-color: #E67E22;
     
     /* 그라데이션 */
-    --primary-gradient: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+    --primary-gradient: linear-gradient(135deg, #E67E22 0%, #D35400 100%);
     --secondary-gradient: linear-gradient(135deg, #F5A623 0%, #F7B731 100%);
-    --accent-gradient: linear-gradient(135deg, #BD10E0 0%, #9013FE 100%);
-    --hero-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --accent-gradient: linear-gradient(135deg, #E67E22 0%, #D35400 100%);
+    --hero-gradient: linear-gradient(135deg, #E67E22 0%, #D35400 100%);
     
     /* 배경 */
     --background-primary: #F8FAFC;
@@ -91,8 +91,8 @@ body::before {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 20% 80%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(189, 16, 224, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(230, 126, 34, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(230, 126, 34, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 40% 40%, rgba(245, 166, 35, 0.1) 0%, transparent 50%);
     z-index: -1;
     pointer-events: none;
@@ -135,7 +135,6 @@ body::before {
 
 .header {
     text-align: center;
-    margin-bottom: var(--spacing-xl);
     padding: var(--spacing-xl) 0;
 }
 
@@ -238,7 +237,7 @@ body::before {
 /* 환영 카드 특별 스타일 */
 .welcome-card {
     background: var(--background-card);
-    border: 1px solid rgba(74, 144, 226, 0.2);
+    border: 1px solid rgba(230, 126, 34, 0.2);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-xl);
     text-align: center;
@@ -403,7 +402,7 @@ body::before {
 .form-input:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
     transform: translateY(-1px);
 }
 
