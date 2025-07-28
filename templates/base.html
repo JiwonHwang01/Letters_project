@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Letters.io</title>
-    
+    <meta property="og:title" content="익명의 편지가 도착했어요!" />
+    <meta property="og:description" content="나만의 익명 편지함을 확인해보세요!" />
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/postbox_not_empty.png' %}" /> <!-- 대표
+      이미지 URL -->
+    <meta property="og:type" content="website" />
+
     <!-- CSS 파일 로드 -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
