@@ -5,13 +5,7 @@
 - [프로젝트 소개](#-프로젝트-소개)
 - [주요 기능](#-주요-기능)
 - [기술 스택](#-기술-스택)
-- [설치 및 실행](#-설치-및-실행)
 - [프로젝트 구조](#-프로젝트-구조)
-- [데이터베이스 스키마](#-데이터베이스-스키마)
-- [사용법](#-사용법)
-- [배포](#-배포)
-- [기여하기](#-기여하기)
-- [라이센스](#-라이센스)
 
 ## 🌟 프로젝트 소개
 
@@ -31,11 +25,11 @@
 - **모던 UI/UX**: 감성적이고 직관적인 인터페이스
 
 ## 📸 스크린샷
-| **메인 화면** | **내 편지함** | **편지 상세보기** |
+| **메인 화면(로그인O)** | **내 편지함** | **편지 상세보기** |
 |:---:|:---:|:---:|
-| <img src="https://github.com/user-attachments/assets/f40acc87-255a-42a2-8db5-1156e8f6a962" width=270> | <img src="https://github.com/user-attachments/assets/a6094f4b-0a1e-4952-8e17-58c51303b3f8" width=270> | <img src="https://github.com/user-attachments/assets/ba161292-126d-40a2-80ee-73f6c1ea50c7" width=270> |
+| <img width="270" alt="main" src="https://github.com/user-attachments/assets/aa69d563-0715-49cd-a379-ca1be456a699" > | <img width="270" alt="myPage" src="https://github.com/user-attachments/assets/1944702f-57d7-4836-ac90-31faab02a2a0" > | <img width="270" alt="letter_detail" src="https://github.com/user-attachments/assets/1806ec64-e3cc-4aff-b14f-9c0d823d3624" > |
 | **편지 작성** | **로그인** | **회원가입** |
-| <img src= "https://github.com/user-attachments/assets/21b8bb58-3048-4ab1-8bd3-00b86e0f5312" width=270> | <img src="https://github.com/user-attachments/assets/8fa83d22-346c-4eb5-a535-3e4e916d0cc5" width=270> | <img src="https://github.com/user-attachments/assets/f8f067ad-446a-42a2-9d1c-e6a02eee85dd" width=270> |
+| <img width="270" alt="write_page" src="https://github.com/user-attachments/assets/e257d312-9d6a-4e2d-a4ce-5ca7a7d38b68" > | <img width="270" alt="login" src="https://github.com/user-attachments/assets/d967c162-b116-49c7-a9f2-79a09836ed3d" > | <img width="270" alt="signup" src="https://github.com/user-attachments/assets/6b8f47c5-5aa4-4ed5-9d1d-6b60cd2735ef" /> |
 
 ## 🚀 주요 기능
 
