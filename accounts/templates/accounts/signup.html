@@ -5,7 +5,7 @@
 {% block content %}
     <div class="header">
         <div class="logo">✨ 회원가입</div>
-        <div class="subtitle">편지함에 가입하세요</div>
+        <div class="subtitle">가입하고 나만의 편지함을 공유하세요</div>
     </div>
 
     <div class="card">
@@ -30,7 +30,7 @@
             {% endif %}
             
             <div class="form-group">
-                <label class="form-label" for="username">사용자 이름</label>
+                <label class="form-label" for="username">이름(익명 가능)</label>
                 <input type="text" class="form-input" name="username" id="username" 
                        placeholder="사용자 이름을 입력하세요" 
                        value="{{ form.username.value|default_if_none:'' }}" required>
