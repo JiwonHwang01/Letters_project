@@ -35,7 +35,8 @@
             font-size: 1rem;
             line-height: 1.8;
             color: var(--text-primary);
-            background: var(--background-color);
+            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            border: 1px solid #E2E8F0;
             border-radius: 12px;
             padding: 20px;
             white-space: pre-wrap;
@@ -54,13 +55,13 @@
 
 {% block content %}
     <div class="header">
-        <div class="logo">📝 편지 내용</div>
+        <div class="logo">📝 Letter Content</div>
     </div>
 
     <div class="letter-content">
         <div class="letter-header">
             <div class="letter-title">{{ letter.title }}</div>
-            <div class="letter-date">📅 {{ letter.pub_date|date:'Y년 m월 d일' }}</div>
+            <div class="letter-date">📅 {{ letter.pub_date|date:'F d, Y' }}</div>
         </div>
         
         <div class="letter-body">{{ letter.letter_text }}</div>
@@ -72,7 +73,7 @@
     
     <div class="btn-group">
         <button type="button" class="btn btn-primary btn-full" onclick="location.href='{% url 'my_page' %}'">
-            📬 편지함으로 돌아가기
+            📬 Back to Mailbox
         </button>
     </div>
 {% endblock %}

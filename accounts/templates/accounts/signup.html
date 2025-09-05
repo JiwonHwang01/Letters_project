@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}회원가입 - Letters{% endblock %}
+{% block title %}Sign Up - Letters{% endblock %}
 
 {% block content %}
     <div class="header">
-        <div class="logo">✨ 회원가입</div>
-        <div class="subtitle">가입하고 나만의 편지함을 공유하세요</div>
+        <div class="logo">✨ Sign Up</div>
+        <div class="subtitle">Sign up and share your own URL</div>
     </div>
 
     <div class="card">
@@ -30,38 +30,38 @@
             {% endif %}
             
             <div class="form-group">
-                <label class="form-label" for="username">이름(익명 가능)</label>
+                <label class="form-label" for="username">Name (any name is fine)</label>
                 <input type="text" class="form-input" name="username" id="username" 
-                       placeholder="사용자 이름을 입력하세요" 
+                       placeholder="Enter your username" 
                        value="{{ form.username.value|default_if_none:'' }}" required>
             </div>
             
             <div class="form-group">
-                <label class="form-label" for="password1">비밀번호</label>
+                <label class="form-label" for="password1">Password</label>
                 <input type="password" class="form-input" name="password1" id="password1" 
-                       placeholder="비밀번호를 입력하세요" 
+                       placeholder="Enter your password" 
                        value="{{ form.password1.value|default_if_none:'' }}" required>
             </div>
             
             <div class="form-group">
-                <label class="form-label" for="password2">비밀번호 확인</label>
+                <label class="form-label" for="password2">Confirm Password</label>
                 <input type="password" class="form-input" name="password2" id="password2" 
-                       placeholder="비밀번호를 다시 입력하세요" 
+                       placeholder="Re-enter your password" 
                        value="{{ form.password2.value|default_if_none:'' }}" required>
             </div>
             
             <div class="btn-group">
                 <button type="submit" class="btn btn-primary btn-full">
-                    ✨ 회원가입
+                    ✨ Sign Up
                 </button>
             </div>
         </form>
         
         <div class="text-center mt-3">
             <p class="text-secondary">
-                이미 계정이 있으신가요? 
+                Already have an account? 
                 <a href="{% url 'login' %}" style="color: var(--primary-color); text-decoration: none;">
-                    로그인하기
+                    Login here
                 </a>
             </p>
         </div>
@@ -69,7 +69,7 @@
     
     <div class="text-center mt-2">
         <a href="{% url 'index' %}" class="btn btn-outline">
-            🏠 홈으로 돌아가기
+            🏠 Back to Home
         </a>
     </div>
 {% endblock %}

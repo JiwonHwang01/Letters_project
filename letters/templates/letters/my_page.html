@@ -91,8 +91,8 @@
 
 {% block content %}
 <div class="header">
-    <div class="logo">📬 편지함</div>
-    <div class="subtitle">총 {{ letter_list|length }}통의 편지가 있습니다</div>
+    <div class="logo">📬 Mailbox</div>
+    <div class="subtitle">You have {{ letter_list|length }} letter{{ letter_list|length|pluralize }}</div>
 </div>
 
 {% if letter_list %}
@@ -121,15 +121,15 @@
     <div class="card">
         <div class="empty-state">
             <div class="empty-icon">📭</div>
-            <h3>아직 받은 편지가 없습니다</h3>
-            <p>편지쓰기 URL을 친구들과 공유해보세요!</p>
+            <h3>No letters received yet</h3>
+            <p>Share your letter URL with friends!</p>
         </div>
     </div>
 {% endif %}
 
 <div class="btn-group mt-lg">
     <button type="button" class="btn btn-primary btn-full" onclick="location.href='{% url 'index' %}'">
-        🏠 홈으로 돌아가기
+        🏠 Back to Home
     </button>
 </div>
 {% endblock %}

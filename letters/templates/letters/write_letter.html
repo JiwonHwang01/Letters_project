@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}편지 작성 - Letters{% endblock %}
+{% block title %}Write Letter - Letters{% endblock %}
 
 {% block style %}
     <style>
@@ -51,13 +51,13 @@
 {% block content %}
     {% if user.is_authenticated %}
         <div class="header">
-            <div class="logo">✍️ 편지 작성</div>
-            <div class="subtitle">편지는 '보내는 사람'란에 <br>작성하신 이름으로 전달됩니다</div>
+            <div class="logo">✍️ Write Letter</div>
+            <div class="subtitle">Letters will be delivered with the name <br>you enter in the 'From' field</div>
         </div>
 
         <div class="letter-form">
             <div class="recipient-info">
-                <div class="recipient-name">📮 받는 사람: {{ user.username }}</div>
+                <div class="recipient-name">📮 To: {{ user.username }}</div>
             </div>
             
             <form method="post" action="{% url 'post_letter' %}">
@@ -65,29 +65,29 @@
                 <input type="hidden" name="user" value="{{ user.username }}"/>
                 
                 <div class="form-group">
-                    <label class="form-label" for="title">제목</label>
+                    <label class="form-label" for="title">Subject</label>
                     <input type="text" class="form-input" name="title" id="title" 
-                           placeholder="편지 제목을 입력하세요" required/>
+                           placeholder="Enter letter subject" required/>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="visitor_id">보내는 사람</label>
+                    <label class="form-label" for="visitor_id">From</label>
                     <input type="text" class="form-input" name="visitor_id" id="visitor_id" 
-                           placeholder="당신의 이름을 입력하세요" required/>
+                           placeholder="Enter your name" required/>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="letter_text">편지 내용</label>
+                    <label class="form-label" for="letter_text">Letter Content</label>
                     <textarea class="form-input letter-textarea" name="letter_text" id="letter_text" 
-                              placeholder="따뜻한 마음을 담아 편지를 작성해주세요..." required></textarea>
+                              placeholder="Write your letter with gentle words..." required></textarea>
                 </div>
                 
                 <div class="form-actions">
                     <button type="button" class="btn btn-outline" onclick="location.href='{% url 'index' %}'">
-                        🏠 홈으로
+                        🏠 Home
                     </button>
                     <button type="submit" class="btn btn-primary" style="flex: 1;">
-                        📮 편지 보내기
+                        📮 Send Letter
                     </button>
                 </div>
             </form>
@@ -96,9 +96,9 @@
     {% else %}
         <div class="card">
             <div class="error-message">
-                ❌ 잘못된 편지 URL입니다.
+                ❌ Invalid letter URL.
                 <br><br>
-                <a href="{% url 'index' %}" class="btn btn-primary">홈으로 돌아가기</a>
+                <a href="{% url 'index' %}" class="btn btn-primary">Back to Home</a>
             </div>
         </div>
     {% endif %}

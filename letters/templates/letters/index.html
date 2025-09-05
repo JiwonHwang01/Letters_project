@@ -242,7 +242,7 @@
 {% block content %}
 <div class="header">
     <div class="logo">📝 Letters</div>
-    <div class="subtitle">익명으로 마음을 전해보세요</div>
+    <div class="subtitle">Share your feelings anonymously</div>
 </div>
 
 <!-- 성공/오류 메시지 표시 -->
@@ -262,9 +262,9 @@
             <div class="postbox-icon" onclick="location.href='/letters/mypage/'">
                 {% load static %}
                 {% if my_letters|length > 0 %}
-                    <img src="{% static 'img/postbox_not_empty.png' %}" alt="편지가 있는 우편함" class="postbox-image">
+                    <img src="{% static 'img/postbox_not_empty.png' %}" alt="Mailbox with letters" class="postbox-image">
                 {% else %}
-                    <img src="{% static 'img/postbox.png' %}" alt="빈 우편함" class="postbox-image">
+                    <img src="{% static 'img/postbox.png' %}" alt="Empty mailbox" class="postbox-image">
                 {% endif %}
                 {% if unread_count > 0 %}
                     <div class="notification-badge{% if unread_count >= 100 %} extra-large{% elif unread_count >= 10 %} large{% endif %}">
@@ -277,33 +277,33 @@
 
     <div class="card slide-in">
         <div class="card-header">
-            <div class="card-title">안녕하세요, <span class="text-accent">{{ user.username }}</span>님!</div>
+            <div class="card-title">Hello, <span class="text-accent">{{ user.username }}</span>!</div>
         </div>
         
         <div class="form-group">
-            <label class="form-label">📮 내 URL</label>
+            <label class="form-label">📮 My URL</label>
             <div class="url-input-group">
                 <input type="text" class="form-input" id="url_text" 
                        value="{{ request.scheme }}://{{ request.get_host }}/letters/{{user.lettercase_url}}" readonly>
                 <button type="button" class="btn btn-secondary" onclick="copyToClipBoard()" id="copy-btn">
-                    📋 URL 복사
+                    📋 Copy URL
                 </button>
             </div>
-            <small class="text-muted">이 URL을 친구들과 공유하여 편지를 받아보세요!</small>
+            <small class="text-muted">Share this URL with friends to receive letters!</small>
         </div>
     </div>
     
     <div class="btn-group mt-md mb-md">
         <form action="/accounts/logout/" method="post" style="width: 100%;">
             {% csrf_token %}
-            <input type="submit" class="btn btn-primary btn-full" value="로그아웃">
+            <input type="submit" class="btn btn-primary btn-full" value="Logout">
         </form>
     </div>
     
     {% if user.is_superuser %}
         <div class="card">
             <button type="button" class="btn btn-primary btn-full" onclick="location.href='/admin/'">
-                ⚙️ 관리자 페이지
+                ⚙️ Admin Panel
             </button>
         </div>
     {% endif %}
@@ -311,16 +311,16 @@
 {% else %}
     <div class="welcome-card slide-in">
         <div class="welcome-section">
-            <h3>더 많은 기능을 원하신다면<br>로그인 해주세요😊</h3>
-            <p class="text-secondary">가입하여 익명의 편지를 받아보세요!</p>
+            <h3>Want more features?<br>Please log in 😊</h3>
+            <p class="text-secondary">Sign up to receive anonymous letters!</p>
         </div>
         
         <div class="btn-group">
             <button type="button" class="btn btn-primary btn-full" onclick="location.href='/accounts/login/'">
-                🔑 로그인
+                🔑 Login
             </button>
             <button type="button" class="btn btn-outline btn-full" onclick="location.href='/accounts/signup/'">
-                ✨ 회원가입
+                ✨ Sign Up
             </button>
         </div>
     </div>
@@ -333,15 +333,15 @@
         const content = document.querySelector("#url_text");
         const button = document.querySelector("#copy-btn");
         
-        // 클립보드에 복사
+        // Copy to clipboard
         content.select();
         document.execCommand("copy");
         
-        // 버튼 효과
+        // Button effect
         const originalText = button.textContent;
         const originalClass = button.className;
         
-        button.textContent = "✅ 복사됨!";
+        button.textContent = "✅ Copied!";
         button.className = button.className.replace('btn-secondary', 'btn-copied');
         
         setTimeout(() => {
@@ -350,7 +350,7 @@
         }, 2000);
     }
 
-    // 알림 닫기 함수
+    // Close alert function
     function closeAlert() {
         const alert = document.getElementById('message-alert');
         if (alert) {
@@ -361,7 +361,7 @@
         }
     }
 
-    // 페이지 로드 시 알림 자동 닫기 (5초 후)
+    // Auto close alert after 5 seconds on page load
     document.addEventListener('DOMContentLoaded', function() {
         const alert = document.getElementById('message-alert');
         if (alert) {

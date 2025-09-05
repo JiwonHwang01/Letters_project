@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}로그인 - Letters{% endblock %}
+{% block title %}Login - Letters{% endblock %}
 
 {% block content %}
     <div class="header">
-        <div class="logo">🔑 로그인</div>
+        <div class="logo">🔑 Login</div>
         <div class="subtitle"> </div>
     </div>
 
@@ -30,29 +30,29 @@
             {% endif %}
             
             <div class="form-group">
-                <label class="form-label" for="username">아이디</label>
+                <label class="form-label" for="username">Username</label>
                 <input type="text" class="form-input" name="username" id="username" 
-                       placeholder="아이디를 입력하세요" required>
+                       placeholder="Enter your username" required>
             </div>
             
             <div class="form-group">
-                <label class="form-label" for="password">비밀번호</label>
+                <label class="form-label" for="password">Password</label>
                 <input type="password" class="form-input" name="password" id="password" 
-                       placeholder="비밀번호를 입력하세요" required>
+                       placeholder="Enter your password" required>
             </div>
             
             <div class="btn-group">
                 <button type="submit" class="btn btn-primary btn-full">
-                    🔑 로그인
+                    🔑 Login
                 </button>
             </div>
         </form>
         
         <div class="text-center mt-3">
             <p class="text-secondary">
-                계정이 없으신가요? 
+                Don't have an account? 
                 <a href="{% url 'signup' %}" style="color: var(--primary-color); text-decoration: none;">
-                    회원가입하기
+                    Sign up here
                 </a>
             </p>
         </div>
@@ -60,7 +60,7 @@
     
     <div class="text-center mt-2">
         <a href="{% url 'index' %}" class="btn btn-outline">
-            🏠 홈으로 돌아가기
+            🏠 Back to Home
         </a>
     </div>
 {% endblock %}

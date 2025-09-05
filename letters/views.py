@@ -20,7 +20,7 @@ def letter(request, hash_id):
     """해시 ID로 편지 상세보기"""
     letter_obj = Letter.get_by_hash_id(hash_id)
     if not letter_obj:
-        raise Http404("편지를 찾을 수 없습니다.")
+        raise Http404("Letter not found.")
     
     # 편지를 읽음 상태로 변경 (아직 읽지 않은 경우에만)
     if not letter_obj.is_read:
@@ -65,7 +65,7 @@ def post_letter(request):
                     letter.save()
                     
                 # 성공 메시지 추가
-                messages.success(request, f'✉️ {user.username}님에게 편지가 성공적으로 전달되었습니다!')
+                messages.success(request, f'✉️ Your letter has been successfully delivered to {user.username}!')
                 return redirect('/letters/')  # 편지 작성 성공
                 
             except Exception as e:
