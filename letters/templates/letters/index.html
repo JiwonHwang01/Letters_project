@@ -266,9 +266,9 @@
                 {% else %}
                     <img src="{% static 'img/postbox.png' %}" alt="빈 우편함" class="postbox-image">
                 {% endif %}
-                {% if my_letters|length > 0 %}
-                    <div class="notification-badge{% if my_letters|length >= 100 %} extra-large{% elif my_letters|length >= 10 %} large{% endif %}">
-                        {% if my_letters|length > 999 %}999+{% else %}{{ my_letters|length }}{% endif %}
+                {% if unread_count > 0 %}
+                    <div class="notification-badge{% if unread_count >= 100 %} extra-large{% elif unread_count >= 10 %} large{% endif %}">
+                        {% if unread_count > 999 %}999+{% else %}{{ unread_count }}{% endif %}
                     </div>
                 {% endif %}
             </div>

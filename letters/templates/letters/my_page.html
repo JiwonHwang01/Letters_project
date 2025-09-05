@@ -11,6 +11,10 @@
         transition: all 0.2s ease;
         cursor: pointer;
         box-shadow: var(--shadow-sm);
+        min-height: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
     
     .letter-card:hover {
@@ -63,6 +67,25 @@
         box-shadow: var(--shadow-md);
     }
     
+    
+    .letter-card.unread {
+        border-left: 4px solid #E53E3E;
+    }
+    
+    .letter-card.unread .letter-title {
+        font-weight: 700;
+    }
+    
+    .unread-indicator {
+        background: #E53E3E;
+        color: white;
+        font-size: 0.7rem;
+        padding: 2px 6px;
+        border-radius: 8px;
+        font-weight: 600;
+        margin-left: 8px;
+    }
+    
 </style>
 {% endblock %}
 
@@ -77,11 +100,18 @@
     <div class="letters-container">
         {% for data in letter_list %}
             {% if data.user == username %}
-                <div class="letter-card" onclick="location.href='{% url 'letter_detail' data.hash_id %}'">
-                    <div class="letter-title">{{ data.title }}</div>
+                <div class="letter-card {% if not data.is_read %}unread{% endif %}" onclick="location.href='{% url 'letter_detail' data.hash_id %}'">
+                    <div class="letter-title">
+                        {{ data.title }}
+                        {% if not data.is_read %}
+                            <span class="unread-indicator">NEW</span>
+                        {% endif %}
+                    </div>
                     <div class="letter-meta">
                         <div class="letter-author">✍️ {{ data.visitor_id }}</div>
-                        <div class="letter-date">📅 {{ data.pub_date|date:'Y-m-d H:i' }}</div>
+                        <div class="letter-date">
+                            <div>📅 {{ data.pub_date|date:'Y-m-d H:i' }}</div>
+                        </div>
                     </div>
                 </div>
             {% endif %}

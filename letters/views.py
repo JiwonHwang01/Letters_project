@@ -6,15 +6,28 @@ from django.contrib.auth import authenticate, login, get_user
 from letters.forms import LetterForm
 from django.views.decorators.csrf import csrf_exempt
 from django.http import Http404
+from django.utils import timezone
 
 def index(request):
-    return render(request, 'letters/index.html')
+    context = {}
+    if request.user.is_authenticated:
+        # 안읽은 편지 개수 계산
+        unread_count = Letter.objects.filter(user=request.user, is_read=False).count()
+        context['unread_count'] = unread_count
+    return render(request, 'letters/index.html', context)
 
 def letter(request, hash_id):
     """해시 ID로 편지 상세보기"""
     letter_obj = Letter.get_by_hash_id(hash_id)
     if not letter_obj:
         raise Http404("편지를 찾을 수 없습니다.")
+    
+    # 편지를 읽음 상태로 변경 (아직 읽지 않은 경우에만)
+    if not letter_obj.is_read:
+        letter_obj.is_read = True
+        letter_obj.read_date = timezone.now()
+        letter_obj.save()
+    
     return render(request, 'letters/letter_detail.html', {'letter': letter_obj})
 
 def mypage(request):

@@ -19,6 +19,8 @@ class Letter(models.Model):
     letter_text = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)  # 읽음 상태 필드 추가
+    read_date = models.DateTimeField(null=True, blank=True)  # 읽은 날짜 (선택사항)
 
     def __str__(self):
         return self.visitor_id
